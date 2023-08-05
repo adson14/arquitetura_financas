@@ -3,11 +3,13 @@ import { TransactionsService } from './transactions.service';
 import { TransactionsController } from './transactions.controller';
 import { Transaction } from './entities/transaction.entity';
 import { SequelizeModule } from '@nestjs/sequelize';
+import { Account } from 'src/accounts/entities/account.entity';
 
 @Module({
   imports: [
     SequelizeModule.forFeature([
-      Transaction
+      Transaction,
+      Account
     ])
   ],
   controllers: [TransactionsController],
