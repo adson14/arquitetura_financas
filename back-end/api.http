@@ -1,0 +1,28 @@
+POST http://localhost:3000/accounts
+Content-Type: application/json
+
+{
+  "name":"Empresa1",
+  "subdomain": "tenant1"
+}
+
+
+###
+GET http://localhost:3000/accounts
+
+
+###
+GET http://localhost:3000/transactions
+
+###
+POST http://localhost:3000/transactions
+Content-Type: application/json
+
+{
+  "payment_date":"2023-08-04",
+  "name": "NOva",
+  "description": "Descrição da despesa",
+  "category": "category1",
+  "amount": 30,
+  "type": "debit"
+}
