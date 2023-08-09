@@ -1,14 +1,20 @@
-import cookie from "cookie";
-//import Cookies from "js-cookie";
+import Cookies from 'js-cookie';
 
-export function parseCookies(req?: any) {
-  if (!req || !req.headers) {
-    return {};
-  }
+const TOKEN_COOKIE_NAME = 'access_token';
 
-  return cookie.parse(req.headers.cookie || "");
-}
+export const setAccessTokenCookie = (token: string) => {
+  Cookies.set(TOKEN_COOKIE_NAME, token, {
+    expires: 10 * 60 * 60, 
+    path: '/',
+  });
+};
 
-// export function destroyCookie(key: string) {
-//   Cookies.remove(key);
-// }
+export const getAccessTokenFromCookie = () => {
+  return Cookies.get(TOKEN_COOKIE_NAME);
+};
+
+export const removeAccessTokenCookie = () => {
+  Cookies.remove(TOKEN_COOKIE_NAME, {
+    path: '/',
+  });
+};

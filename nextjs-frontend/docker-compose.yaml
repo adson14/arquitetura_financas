@@ -10,6 +10,8 @@ services:
     entrypoint: ./.docker/entrypoint.sh
     volumes:
       - '.:/home/node/app'
+    extra_hosts:
+      - 'host-local.docker.internal:172.17.0.1'
 networks:
   arquitetura-network:
     driver: bridge

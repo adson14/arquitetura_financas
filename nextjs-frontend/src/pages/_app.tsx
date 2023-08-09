@@ -3,15 +3,15 @@ import '../styles/globals.css'
 import type { AppContext, AppProps } from 'next/app'
 import theme from '../utils/theme'
 import { useEffect } from 'react'
-import {
-  SSRKeycloakProvider,
-  SSRCookies,
-  getKeycloakInstance,
-} from "@react-keycloak/ssr";
-import { KEYCLOAK_PUBLIC_CONFIG } from '../utils/auth'
-import { parseCookies } from '../utils/cookies'
+import { getAccessTokenFromCookie } from '../utils/cookies'
+import { AuthProvider, useAuth } from '../context/AuthContext';
+import { useRouter } from 'next/router'
+import AuthPage from './auth'
 
-function MyApp({ Component, pageProps, cookies }: AppProps & {cookies: any}) {
+function MyApp({ Component, pageProps }: AppProps) {
+
+
+  const router = useRouter();
 
   useEffect(() => {
     const jssStyles = document.querySelector('#jss-server-side')
@@ -21,20 +21,16 @@ function MyApp({ Component, pageProps, cookies }: AppProps & {cookies: any}) {
   })
   
   return (
-    <SSRKeycloakProvider persistor={SSRCookies(cookies)} keycloakConfig={KEYCLOAK_PUBLIC_CONFIG as any}>
+    <AuthProvider>
        <ThemeProvider theme={theme}>
         <CssBaseline/>
+        <AuthPage/>
         <Component {...pageProps} />
       </ThemeProvider>
-    </SSRKeycloakProvider>
-   
+    </AuthProvider>
+
   )
 }
 
-MyApp.getInitialProps = async (appContext: AppContext) => {
-  return {
-    cookie: parseCookies(appContext.ctx.req)
-  }
-}
 
 export default MyApp
