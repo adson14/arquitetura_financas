@@ -4,6 +4,7 @@ import { CreateReportDto } from './dto/create-report.dto';
 import { JwtAuthGuard } from './../auth/jwt-auth.guard';
 import { TenantGuard } from 'src/tenant/tenant/tenant.guard';
 
+@UseGuards(JwtAuthGuard, TenantGuard)
 @Controller('reports')
 export class ReportsController {
   constructor(private readonly reportsService: ReportsService) {}

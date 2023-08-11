@@ -9,8 +9,6 @@ import { useRouter } from 'next/router'
 import AuthPage from './auth'
 
 function MyApp({ Component, pageProps }: AppProps) {
-
-
   const router = useRouter();
 
   useEffect(() => {
@@ -28,7 +26,6 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Component {...pageProps} />
       </ThemeProvider>
     </AuthProvider>
-
   )
 }
 
