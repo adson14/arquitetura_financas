@@ -5,13 +5,15 @@ services:
     build: .
     ports:
       - '3000:3000'
-    networks:
-      - development-network
+    # networks:
+    #   - development-network
     entrypoint: dockerize -wait tcp://db:3306 -timeout 40s ./.docker/entrypoint.sh
     volumes:
       - '.:/home/node/app'
     depends_on:
       - db
+    extra_hosts:
+      - 'host-local.docker.internal:172.17.0.1'
 
   db:
     build: ./.docker/db
@@ -21,8 +23,8 @@ services:
       - './.docker/dbdata:/var/lib/mysql'
     ports:
       - '3306:3306'
-    networks:
-      - development-network
+    # networks:
+    #   - development-network
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: financa

@@ -17,7 +17,7 @@ const fetcher =  (url: string) =>
 export function useAuthSwr(url: string, config?: SWRConfiguration) {
   const { data, error } = useSWR<any, AxiosError>(url, fetcher, config);
   const { push } = useRouter();
-console.log('aq')
+
   useEffect(() => {
     if (error?.response?.status === 401) {
       push("/logout");

@@ -1,6 +1,6 @@
 import { DataGrid, GridColDef, GridToolbar } from '@mui/x-data-grid';
 
-import { Box, Button,Container,Typography } from '@mui/material';
+import { Box, Button,Container,Link,Typography } from '@mui/material';
 import type { GetServerSideProps, GetServerSidePropsContext, NextPage } from 'next';
 import { Token, validateAuth } from '../../utils/auth';
 import { http } from '../../utils/http';
@@ -24,10 +24,11 @@ const columns: GridColDef[] = [
   },
   { field: 'status', headerName: 'Status',width: 250},
   { field: 'file_url', headerName: 'Download',width: 200,
-    renderCell: (params) => (
-      <a href={params.value} target="_blank" rel="noopener noreferrer">
-        {params.value}
-      </a>
+    renderCell: (params) => ( (params.value) ?
+      <Link href={params.value} target="_blank" rel="noopener noreferrer">
+        Download
+      </Link>
+      : null
   ) 
   },
   { 
