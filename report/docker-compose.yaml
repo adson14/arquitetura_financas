@@ -6,4 +6,10 @@ services:
     volumes:
       - .:/go/src/
     extra_hosts:
-      - "host.docker.internal:172.17.0.1"
+      - "host-local.docker.internal:172.17.0.1"
+    networks:
+      - my-network
+
+networks:
+  my-network:
+    external: true
